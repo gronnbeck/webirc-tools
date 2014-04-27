@@ -17,56 +17,20 @@ ws.on('open', function() {
     ws.send(payload)
   }
 
-  var expect = function(param, toBe) {
-    ws.on('message', function(payload) {
-      var message = JSON.parse(payload)
-      var assert = message[param] === toBe
-      if (!assert) {
-        console.log ('Expected ' + param
-        + ' to be ' + toBe + ' but was ' + message[param] )
-      }
-      else {
-        console.log ('Identify test passed')
-      }
 
-      ws.removeAllListeners('message')
+  ws.on('message', function(payload) {
+    var message = JSON.parse(payload)
 
-      next()
-    })
-  }
+    console.log(payload)
 
-  var identifyTest = ['type', 'identify', function() {
-    send({
-      type: 'identify',
-      id: 'a2VuZ3JvZW5uQGdtYWlsLmNvbQ=='
-    })
-  }]
+  })
 
-  var secondIdentifyTest = ['success', false, function() {
-    send({
-      type: 'identify',
-      id: 'a2VuZ3JvZW5uQGdtYWlsLmNvbQ=='
-    })
-  }]
+  send({
+    type: 'identify',
+    id: 'a2VuZ3JvZW5uQGdtYWlsLmNvbQ==',
+    hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  })
 
-  var tests = [identifyTest, secondIdentifyTest]
-  var next = function() {
-    runTests()
-  }
-
-  var runTest = function(test) {
-    expect(test[0], test[1])
-    test[2]()
-  }
-
-  var runTests = function() {
-    if (tests.length > 0) {
-      var test = tests.shift()
-      runTest(test)
-    }
-  }
-
-  runTests()
 
   ws.on('close', function() {
     console.log('closed!')
