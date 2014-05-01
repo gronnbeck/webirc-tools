@@ -31,6 +31,18 @@ ws.on('open', function() {
     hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   })
 
+  send({
+    type: 'does not exsist',
+    id: 'a2VuZ3JvZW5uQGdtYWlsLmNvbQ==',
+    hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  })
+
+  send({
+    type: 'login',
+    id: 'a2VuZ3JvZW5uQGdtYWlsLmNvbQ==',
+    hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  })
+
 
   ws.on('close', function() {
     console.log('closed!')
